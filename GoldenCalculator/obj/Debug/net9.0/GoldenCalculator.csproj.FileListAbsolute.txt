@@ -34,3 +34,4 @@ C:\calculadora1\GoldenCalculator\obj\Debug\net9.0\ref\GoldenCalculator.dll
 C:\calculadora1\GoldenCalculator\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\calculadora1\GoldenCalculator\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\calculadora1\GoldenCalculator\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\calculadora1\GoldenCalculator\obj\Debug\net9.0\GoldenCalculator.sourcelink.json
