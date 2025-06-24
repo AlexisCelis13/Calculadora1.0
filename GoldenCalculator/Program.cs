@@ -25,11 +25,9 @@ builder.Services.AddDbContext<GoldenCalculator.Models.OperacionesDbContext>(opti
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Configurar Swagger siempre
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
@@ -47,4 +45,3 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
-//a
