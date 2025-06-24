@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using GoldenCalculator.Models;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GoldenCalculator.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class VolumenController : ControllerBase
     {
         private readonly OperacionesDbContext _db;
