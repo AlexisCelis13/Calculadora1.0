@@ -11,11 +11,9 @@ namespace GoldenCalculator.Controllers
     [Authorize]
     public class AreaController : ControllerBase
     {
-        private readonly OperacionesDbContext _db;
         private readonly OperacionRepository _repo;
-        public AreaController(OperacionesDbContext db, OperacionRepository repo)
+        public AreaController(OperacionRepository repo)
         {
-            _db = db;
             _repo = repo;
         }
 
