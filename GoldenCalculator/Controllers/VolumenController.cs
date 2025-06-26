@@ -12,10 +12,10 @@ namespace GoldenCalculator.Controllers
     public class VolumenController : ControllerBase
     
     {
-        private readonly OperacionRepository _repo;
-        public VolumenController(OperacionRepository repo)
+        private readonly OperacionService _servicio;
+        public VolumenController(OperacionService servicio)
         {
-            _repo = repo;
+            _servicio = servicio;
         }
 
         [HttpGet("cubo")]
@@ -28,10 +28,10 @@ namespace GoldenCalculator.Controllers
             var operacion = new Operacion
             {
                 Tipo = "volumen_cubo",
-                Parametros = JsonSerializer.Serialize(new { lado }),
-                Resultado = JsonSerializer.Serialize(new { volumen })
+                Parametros = System.Text.Json.JsonSerializer.Serialize(new { lado }),
+                Resultado = System.Text.Json.JsonSerializer.Serialize(new { volumen })
             };
-            await _repo.AgregarOperacionAsync(operacion);
+            await _servicio.AgregarOperacionAsync(operacion);
             return Ok(new { volumen = volumen });
         }
 
@@ -45,10 +45,10 @@ namespace GoldenCalculator.Controllers
             var operacion = new Operacion
             {
                 Tipo = "volumen_prisma_rectangular",
-                Parametros = JsonSerializer.Serialize(new { largo, ancho, alto }),
-                Resultado = JsonSerializer.Serialize(new { volumen })
+                Parametros = System.Text.Json.JsonSerializer.Serialize(new { largo, ancho, alto }),
+                Resultado = System.Text.Json.JsonSerializer.Serialize(new { volumen })
             };
-            await _repo.AgregarOperacionAsync(operacion);
+            await _servicio.AgregarOperacionAsync(operacion);
             return Ok(new { volumen = volumen });
         }
 
@@ -62,10 +62,10 @@ namespace GoldenCalculator.Controllers
             var operacion = new Operacion
             {
                 Tipo = "volumen_cilindro",
-                Parametros = JsonSerializer.Serialize(new { radio, altura }),
-                Resultado = JsonSerializer.Serialize(new { volumen })
+                Parametros = System.Text.Json.JsonSerializer.Serialize(new { radio, altura }),
+                Resultado = System.Text.Json.JsonSerializer.Serialize(new { volumen })
             };
-            await _repo.AgregarOperacionAsync(operacion);
+            await _servicio.AgregarOperacionAsync(operacion);
             return Ok(new { volumen = volumen });
         }
 
@@ -79,10 +79,10 @@ namespace GoldenCalculator.Controllers
             var operacion = new Operacion
             {
                 Tipo = "volumen_esfera",
-                Parametros = JsonSerializer.Serialize(new { radio }),
-                Resultado = JsonSerializer.Serialize(new { volumen })
+                Parametros = System.Text.Json.JsonSerializer.Serialize(new { radio }),
+                Resultado = System.Text.Json.JsonSerializer.Serialize(new { volumen })
             };
-            await _repo.AgregarOperacionAsync(operacion);
+            await _servicio.AgregarOperacionAsync(operacion);
             return Ok(new { volumen = volumen });
         }
 
@@ -96,10 +96,10 @@ namespace GoldenCalculator.Controllers
             var operacion = new Operacion
             {
                 Tipo = "volumen_cono",
-                Parametros = JsonSerializer.Serialize(new { radio, altura }),
-                Resultado = JsonSerializer.Serialize(new { volumen })
+                Parametros = System.Text.Json.JsonSerializer.Serialize(new { radio, altura }),
+                Resultado = System.Text.Json.JsonSerializer.Serialize(new { volumen })
             };
-            await _repo.AgregarOperacionAsync(operacion);
+            await _servicio.AgregarOperacionAsync(operacion);
             return Ok(new { volumen = volumen });
         }
     }

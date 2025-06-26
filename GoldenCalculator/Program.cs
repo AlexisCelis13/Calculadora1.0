@@ -51,8 +51,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<GoldenCalculator.Models.OperacionesDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<GoldenCalculator.Services.OperacionService>();
 builder.Services.AddScoped<GoldenCalculator.Services.OperacionRepository>();
+builder.Services.AddScoped<GoldenCalculator.Services.OperacionService>();
 
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "SuperClaveJwtDeEjemplo1234567890";
 var key = Encoding.ASCII.GetBytes(jwtKey);

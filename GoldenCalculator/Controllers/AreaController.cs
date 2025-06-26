@@ -11,10 +11,10 @@ namespace GoldenCalculator.Controllers
     [Authorize]
     public class AreaController : ControllerBase
     {
-        private readonly OperacionRepository _repo;
-        public AreaController(OperacionRepository repo)
+        private readonly OperacionService _servicio;
+        public AreaController(OperacionService servicio)
         {
-            _repo = repo;
+            _servicio = servicio;
         }
 
         [HttpGet("cuadrado")]
@@ -30,7 +30,7 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { lado }),
                 Resultado = JsonSerializer.Serialize(new { area })
             };
-            await _repo.AgregarOperacionAsync(operacion);
+            await _servicio.AgregarOperacionAsync(operacion);
             return Ok(new { area = area });
         }
 
@@ -47,7 +47,7 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { base_, altura }),
                 Resultado = JsonSerializer.Serialize(new { area })
             };
-            await _repo.AgregarOperacionAsync(operacion);
+            await _servicio.AgregarOperacionAsync(operacion);
             return Ok(new { area = area });
         }
 
@@ -64,7 +64,7 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { base_, altura }),
                 Resultado = JsonSerializer.Serialize(new { area })
             };
-            await _repo.AgregarOperacionAsync(operacion);
+            await _servicio.AgregarOperacionAsync(operacion);
             return Ok(new { area = area });
         }
 
@@ -81,14 +81,14 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { radio }),
                 Resultado = JsonSerializer.Serialize(new { area })
             };
-            await _repo.AgregarOperacionAsync(operacion);
+            await _servicio.AgregarOperacionAsync(operacion);
             return Ok(new { area = area });
         }
 
         [HttpGet("historial")]
         public async Task<IActionResult> Historial()
         {
-            var historial = await _repo.ObtenerHistorialAsync();
+            var historial = await _servicio.ObtenerHistorialAsync();
             return Ok(historial);
         }
     }

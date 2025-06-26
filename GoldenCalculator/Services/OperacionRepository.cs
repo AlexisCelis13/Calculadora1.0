@@ -1,24 +1,25 @@
 using GoldenCalculator.Models;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace GoldenCalculator.Services
 {
-    public class OperacionRepository
+    public class OperacionService
     {
-        private readonly OperacionService _service;
-        public OperacionRepository(OperacionService service)
+        private readonly OperacionRepository _repo;
+        public OperacionService(OperacionRepository repo)
         {
-            _service = service;
+            _repo = repo;
         }
 
         public async Task AgregarOperacionAsync(Operacion operacion)
         {
-            await _service.AgregarOperacionAsync(operacion);
+            await _repo.AgregarOperacionAsync(operacion);
         }
 
         public async Task<List<Operacion>> ObtenerHistorialAsync()
         {
-            return await _service.ObtenerHistorialAsync();
+            return await _repo.ObtenerHistorialAsync();
         }
     }
 } 

@@ -6,10 +6,10 @@ using System.Collections.Generic;
 
 namespace GoldenCalculator.Services
 {
-    public class OperacionService
+    public class OperacionRepository
     {
         private readonly OperacionesDbContext _db;
-        public OperacionService(OperacionesDbContext db)
+        public OperacionRepository(OperacionesDbContext db)
         {
             _db = db;
         }
