@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using GoldenCalculator.Services;
 
 namespace GoldenCalculator.Controllers
 {
@@ -12,9 +13,11 @@ namespace GoldenCalculator.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _config;
-        public AuthController(IConfiguration config)
+        private readonly OperacionRepository _repo;
+        public AuthController(IConfiguration config, OperacionRepository repo)
         {
             _config = config;
+            _repo = repo;
         }
 
         [HttpPost("login")]

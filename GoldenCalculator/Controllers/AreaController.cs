@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using GoldenCalculator.Models;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
+using GoldenCalculator.Services;
 
 namespace GoldenCalculator.Controllers
 {
@@ -11,13 +12,15 @@ namespace GoldenCalculator.Controllers
     public class AreaController : ControllerBase
     {
         private readonly OperacionesDbContext _db;
-        public AreaController(OperacionesDbContext db)
+        private readonly OperacionRepository _repo;
+        public AreaController(OperacionesDbContext db, OperacionRepository repo)
         {
             _db = db;
+            _repo = repo;
         }
 
         [HttpGet("cuadrado")]
-        public IActionResult CalcularAreaCuadrado(double lado)
+        public async Task<IActionResult> CalcularAreaCuadrado(double lado)
         {
             if (lado <= 0)
                 return BadRequest("El lado debe ser mayor que 0");
@@ -29,13 +32,12 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { lado }),
                 Resultado = JsonSerializer.Serialize(new { area })
             };
-            _db.Operaciones.Add(operacion);
-            _db.SaveChanges();
+            await _repo.AgregarOperacionAsync(operacion);
             return Ok(new { area = area });
         }
 
         [HttpGet("rectangulo")]
-        public IActionResult CalcularAreaRectangulo(double base_, double altura)
+        public async Task<IActionResult> CalcularAreaRectangulo(double base_, double altura)
         {
             if (base_ <= 0 || altura <= 0)
                 return BadRequest("La base y la altura deben ser mayores que 0");
@@ -47,13 +49,12 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { base_, altura }),
                 Resultado = JsonSerializer.Serialize(new { area })
             };
-            _db.Operaciones.Add(operacion);
-            _db.SaveChanges();
+            await _repo.AgregarOperacionAsync(operacion);
             return Ok(new { area = area });
         }
 
         [HttpGet("triangulo")]
-        public IActionResult CalcularAreaTriangulo(double base_, double altura)
+        public async Task<IActionResult> CalcularAreaTriangulo(double base_, double altura)
         {
             if (base_ <= 0 || altura <= 0)
                 return BadRequest("La base y la altura deben ser mayores que 0");
@@ -65,13 +66,12 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { base_, altura }),
                 Resultado = JsonSerializer.Serialize(new { area })
             };
-            _db.Operaciones.Add(operacion);
-            _db.SaveChanges();
+            await _repo.AgregarOperacionAsync(operacion);
             return Ok(new { area = area });
         }
 
         [HttpGet("circulo")]
-        public IActionResult CalcularAreaCirculo(double radio)
+        public async Task<IActionResult> CalcularAreaCirculo(double radio)
         {
             if (radio <= 0)
                 return BadRequest("El radio debe ser mayor que 0");
@@ -83,15 +83,14 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { radio }),
                 Resultado = JsonSerializer.Serialize(new { area })
             };
-            _db.Operaciones.Add(operacion);
-            _db.SaveChanges();
+            await _repo.AgregarOperacionAsync(operacion);
             return Ok(new { area = area });
         }
 
         [HttpGet("historial")]
-        public IActionResult Historial()
+        public async Task<IActionResult> Historial()
         {
-            var historial = _db.Operaciones.OrderByDescending(o => o.Fecha).Take(100).ToList();
+            var historial = await _repo.ObtenerHistorialAsync();
             return Ok(historial);
         }
     }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using GoldenCalculator.Models;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
+using GoldenCalculator.Services;
 
 namespace GoldenCalculator.Controllers
 {
@@ -9,15 +10,16 @@ namespace GoldenCalculator.Controllers
     [Route("api/[controller]")]
     [Authorize]
     public class VolumenController : ControllerBase
+    
     {
-        private readonly OperacionesDbContext _db;
-        public VolumenController(OperacionesDbContext db)
+        private readonly OperacionRepository _repo;
+        public VolumenController(OperacionRepository repo)
         {
-            _db = db;
+            _repo = repo;
         }
 
         [HttpGet("cubo")]
-        public IActionResult CalcularVolumenCubo(double lado)
+        public async Task<IActionResult> CalcularVolumenCubo(double lado)
         {
             if (lado <= 0)
                 return BadRequest("El lado debe ser mayor que 0");
@@ -29,13 +31,12 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { lado }),
                 Resultado = JsonSerializer.Serialize(new { volumen })
             };
-            _db.Operaciones.Add(operacion);
-            _db.SaveChanges();
+            await _repo.AgregarOperacionAsync(operacion);
             return Ok(new { volumen = volumen });
         }
 
         [HttpGet("prisma-rectangular")]
-        public IActionResult CalcularVolumenPrismaRectangular(double largo, double ancho, double alto)
+        public async Task<IActionResult> CalcularVolumenPrismaRectangular(double largo, double ancho, double alto)
         {
             if (largo <= 0 || ancho <= 0 || alto <= 0)
                 return BadRequest("Las dimensiones deben ser mayores que 0");
@@ -47,13 +48,12 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { largo, ancho, alto }),
                 Resultado = JsonSerializer.Serialize(new { volumen })
             };
-            _db.Operaciones.Add(operacion);
-            _db.SaveChanges();
+            await _repo.AgregarOperacionAsync(operacion);
             return Ok(new { volumen = volumen });
         }
 
         [HttpGet("cilindro")]
-        public IActionResult CalcularVolumenCilindro(double radio, double altura)
+        public async Task<IActionResult> CalcularVolumenCilindro(double radio, double altura)
         {
             if (radio <= 0 || altura <= 0)
                 return BadRequest("El radio y la altura deben ser mayores que 0");
@@ -65,13 +65,12 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { radio, altura }),
                 Resultado = JsonSerializer.Serialize(new { volumen })
             };
-            _db.Operaciones.Add(operacion);
-            _db.SaveChanges();
+            await _repo.AgregarOperacionAsync(operacion);
             return Ok(new { volumen = volumen });
         }
 
         [HttpGet("esfera")]
-        public IActionResult CalcularVolumenEsfera(double radio)
+        public async Task<IActionResult> CalcularVolumenEsfera(double radio)
         {
             if (radio <= 0)
                 return BadRequest("El radio debe ser mayor que 0");
@@ -83,13 +82,12 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { radio }),
                 Resultado = JsonSerializer.Serialize(new { volumen })
             };
-            _db.Operaciones.Add(operacion);
-            _db.SaveChanges();
+            await _repo.AgregarOperacionAsync(operacion);
             return Ok(new { volumen = volumen });
         }
 
         [HttpGet("cono")]
-        public IActionResult CalcularVolumenCono(double radio, double altura)
+        public async Task<IActionResult> CalcularVolumenCono(double radio, double altura)
         {
             if (radio <= 0 || altura <= 0)
                 return BadRequest("El radio y la altura deben ser mayores que 0");
@@ -101,8 +99,7 @@ namespace GoldenCalculator.Controllers
                 Parametros = JsonSerializer.Serialize(new { radio, altura }),
                 Resultado = JsonSerializer.Serialize(new { volumen })
             };
-            _db.Operaciones.Add(operacion);
-            _db.SaveChanges();
+            await _repo.AgregarOperacionAsync(operacion);
             return Ok(new { volumen = volumen });
         }
     }
