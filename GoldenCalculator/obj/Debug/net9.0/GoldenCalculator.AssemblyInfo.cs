@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GoldenCalculator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6877473f12fe177d1f5fd9d3b188a72eb5a7ddfb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+83a4703173b012477fe1e8721c78803166b281a3")]
 [assembly: System.Reflection.AssemblyProductAttribute("GoldenCalculator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GoldenCalculator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
